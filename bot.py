@@ -288,7 +288,7 @@ async def on_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
             pass
         return
 
-    # Admin muafiyeti YOK — herkese uygulanır
+    # Admin muafiyeti yok
 
     if s.get("flood") and is_flood(chat.id, user.id):
         try:
@@ -307,7 +307,8 @@ async def on_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
             pass
         return
 
-    if s.get("anti_forward") and (msg.forward_origin or msg.forward_date):
+    # DÜZELTİLDİ: forward_date kaldırıldı
+    if s.get("anti_forward") and msg.forward_origin:
         try:
             await msg.delete()
         except Exception:
