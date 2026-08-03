@@ -288,8 +288,7 @@ async def on_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
             pass
         return
 
-    if await is_admin(update, context):
-        return
+    # Admin muafiyeti YOK — herkese uygulanır
 
     if s.get("flood") and is_flood(chat.id, user.id):
         try:
@@ -437,7 +436,7 @@ async def dashboard(request: Request):
 <style>
 body{font-family:system-ui;background:#0f0f13;color:#eee;margin:0;padding:16px}
 h1{margin:0}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
 .card{background:#1a1a24;border-radius:14px;padding:16px;margin-bottom:14px}
 .row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #2a2a3a}
 .row:last-child{border:none}
@@ -445,6 +444,8 @@ a.btn{background:#6c5ce7;color:#fff;border:none;padding:8px 14px;border-radius:8
 a.off{background:#333}
 small{color:#888}
 h3{margin:0 0 4px}
+.info{font-size:13px;line-height:1.55;color:#ccc}
+.info b{color:#fff}
 </style>
 </head>
 <body>
@@ -452,7 +453,25 @@ h3{margin:0 0 4px}
 <h1>🌪️ Tornado Guard</h1>
 <a class="btn" href="/logout">Çıkış</a>
 </div>
-<p style="color:#888;font-size:14px;margin-top:0">Gruplar otomatik eklenir. Botu gruba ekleyip /id yaz.</p>
+
+<div class="card">
+<h3>📋 Komutlar & Bilgi</h3>
+<div class="info">
+<b>/id</b> — Kullanıcı + Grup ID gösterir<br>
+<b>/admin</b> — Reply ile sınırlı yetki verir (silme + mesaj/görsel atma)<br>
+<b>/unadmin</b> — Yetkiyi alır<br>
+<b>/kick</b> — Gruptan atar<br>
+<b>/ban</b> — Kalıcı banlar<br>
+<b>/unban</b> — Banı açar<br><br>
+<b>🌊 Flood</b> — Kısa sürede çok mesaj atanı siler (mute yok)<br>
+<b>🔗 Link engelle</b> — Link içeren mesajları siler<br>
+<b>↪️ Forward engelle</b> — İletilen (forward) mesajları siler<br>
+<b>🧹 Servis mesaj</b> — Katıldı/ayrıldı vs. sistem mesajlarını siler<br>
+<b>🖼️ Medya sil</b> — Foto, sticker, video, gif siler
+</div>
+</div>
+
+<p style="color:#888;font-size:14px;margin:8px 0">Gruplar otomatik eklenir. Botu gruba ekleyip /id yaz.</p>
 """
     if not groups:
         html += '<div class="card">Henüz grup yok.<br>Botu gruba ekle ve bir kere <b>/id</b> yaz.</div>'
