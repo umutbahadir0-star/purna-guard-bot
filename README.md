@@ -1,1 +1,0 @@
-# purna-guard-bot
